@@ -28,6 +28,21 @@ var albumPicasso = {
      ]
  };
 
+ var albumWhite = {
+     title: 'The White Album',
+     artist: 'The Beatles',
+     label: 'Apple Records',
+     year: '1968',
+     albumArtUrl: 'assets/images/album_covers/20.png',
+     songs: [
+         { title: 'Back In The U.S.S.R.', duration: '2:43' },
+         { title: 'Dear Prudence', duration: '3:56' },
+         { title: 'Glass Onion', duration: '2:17'},
+         { title: 'Ob-La-Di, Ob-La-Da', duration: '3:08' },
+         { title: 'Wild Honey Pie', duration: '0:58'}
+     ]
+ };
+
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -40,13 +55,19 @@ var albumPicasso = {
      return template;
  };
 
+ var albumTitle = document.getElementsByClassName('album-view-title')[0];
+ var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+ var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+ var albumImage = document.getElementsByClassName('album-cover-art')[0];
+ var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
  var setCurrentAlbum = function(album) {
      // #1
-     var albumTitle = document.getElementsByClassName('album-view-title')[0];
-     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-     var albumImage = document.getElementsByClassName('album-cover-art')[0];
-     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+      albumTitle = document.getElementsByClassName('album-view-title')[0];
+      albumArtist = document.getElementsByClassName('album-view-artist')[0];
+      albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+      albumImage = document.getElementsByClassName('album-cover-art')[0];
+      albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
      // #2
      albumTitle.firstChild.nodeValue = album.title;
@@ -65,4 +86,15 @@ var albumPicasso = {
 
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
+
+     var toggleEvent = [albumPicasso, albumMarconi, albumWhite];
+     var x = 1;
+
+     albumImage.addEventListener("click", function(event)) {
+       setCurrentAlbum(album[index]);
+       x++;
+       if(x = toggleEvent.length){
+         x = 0;
+       }
+     }
  };
