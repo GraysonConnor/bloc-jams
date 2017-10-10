@@ -84,13 +84,20 @@ var albumPicasso = {
      }
  };
 
+ var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
+
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
+
+     songListContainer.addEventListener('mouseover', function(event) {
+         // #1
+         console.log(event.target);
+     });
 
      var toggleEvent = [albumPicasso, albumMarconi, albumWhite];
      var x = 1;
 
-     albumImage.addEventListener("click", function(event)) {
+     albumImage.addEventListener("click", function(event) {
        setCurrentAlbum(album[index]);
        x++;
        if(x = toggleEvent.length){
