@@ -62,20 +62,11 @@ var albumPicasso = {
  var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
  var setCurrentAlbum = function(album) {
-     // #1
-      albumTitle = document.getElementsByClassName('album-view-title')[0];
-      albumArtist = document.getElementsByClassName('album-view-artist')[0];
-      albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-      albumImage = document.getElementsByClassName('album-cover-art')[0];
-      albumSongList = document.getElementsByClassName('album-view-song-list')[0];
-
-     // #2
      albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
      albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
      albumImage.setAttribute('src', album.albumArtUrl);
 
-     // #3
      albumSongList.innerHTML = '';
 
      // #4
@@ -84,24 +75,17 @@ var albumPicasso = {
      }
  };
 
- var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
-
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
-
-     songListContainer.addEventListener('mouseover', function(event) {
-         // #1
-         console.log(event.target);
-     });
 
      var toggleEvent = [albumPicasso, albumMarconi, albumWhite];
      var x = 1;
 
      albumImage.addEventListener("click", function(event) {
-       setCurrentAlbum(album[index]);
+       setCurrentAlbum(toggleEvent[x]);
        x++;
-       if(x = toggleEvent.length){
+       if(x == toggleEvent.length){
          x = 0;
        }
-     }
- };
+     });
+ }
