@@ -76,8 +76,16 @@ $albumImage.attr('src', album.albumArtUrl);
  var findParentByClassName = function(element, targetClass) {
     if (element) {
         var currentParent = element.parentElement;
+        if (currentParent == null) {
+          console.log('No Parent Found');
+          return;
+        }
         while (currentParent.className !== targetClass && currentParent.className !== null) {
             currentParent = currentParent.parentElement;
+            if (currentParent == null) {
+              console.log('No Parent Found With That Class Name');
+                    return;
+            }
         }
         return currentParent;
     }
