@@ -166,18 +166,7 @@
     width: 5.75rem;
     vertical-align: middle;
 }
-We style the volume icon so that it's easily viewable.
 
-Experiment with these properties to create a new look for the volume controls. When you feel comfortable with these properties and how they affect elements, revert back to the original styles.
-
-Mobile
-
-The player bar collapses on itself when viewed on smaller screens, rendering it unusable. We need to change it so that past a certain screen width, the .control-group elements stack vertically instead of horizontally.
-
-Add the mobile styles to player_bar.css:
-
-~/bloc/bloc-jams/styles/player_bar.css
-...
 .player-bar .volume .seek-bar {
     display: inline-block;
     width: 5.75rem;
