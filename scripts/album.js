@@ -12,7 +12,7 @@
 
 
      var clickHandler = function() {
-       var songNumber = parseInt$(this).attr('data-song-number');
+       var songNumber = parseInt($(this).attr('data-song-number'));
        if (currentlyPlayingSongNumber !== null) {
        var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
        currentlyPlayingCell.html(currentlyPlayingSongNumber);
