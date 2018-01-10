@@ -4,7 +4,7 @@
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
-      + '  <td class="song-item-duration">' + songLength + '</td>'
+      + '   <td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'
       + '</tr>'
       ;
 
@@ -101,13 +101,12 @@
 
  var updateSeekBarWhileSongPlays = function() {
      if (currentSoundFile) {
-         // #10
          currentSoundFile.bind('timeupdate', function(event) {
-             // #11
              var seekBarFillRatio = this.getTime() / this.getDuration();
              var $seekBar = $('.seek-control .seek-bar');
 
              updateSeekPercentage($seekBar, seekBarFillRatio);
+             setCurrentTimeInPlayerBar(this.getTime());
          });
      }
  };
@@ -168,6 +167,30 @@
     });
 };
 
+var setCurrentTimeInPlayerBar = function(currentTime) {
+     if (currentSoundFile) {
+         filterTimeCode
+         $('.current-time').text(filterTimeCode(currentTime));
+     }
+ };
+
+ var setTotalTimeInPlayerBar = function(totalTime) {
+     if (currentSoundFile) {
+         $('.total-time').text(filterTimeCode(totalTime));
+     }
+ };
+
+ var filterTimeCode = function(timeInSeconds) {
+     var roundedTime = Math.floor(parseFloat(timeInSeconds));
+     var minutes = Math.floor(roundedTime / 60);
+     var seconds = Math.floor(roundedTime % 60);
+     if (roundedTime < 10) {
+         return minutes + ':0' + seconds;
+     } else {
+         return minutes + ':' + seconds;
+     }
+ };
+
 
  var trackIndex = function(album, song) {
      return album.songs.indexOf(song);
@@ -179,6 +202,7 @@
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
     $('.main-controls .play-pause').html(playerBarPauseButton);
+    setTotalTimeInPlayerBar(currentSongFromAlbum.duration);
 
 };
 
